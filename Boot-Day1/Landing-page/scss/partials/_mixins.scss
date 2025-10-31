@@ -8,3 +8,9 @@
     display: flex;
     flex-direction: column;
 }
+
+@mixin flex-start {
+    color: $footer-head-text;
+    font-size: $footer-head-text-size;
+    padding: 15px 0;
+}

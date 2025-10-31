@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+  <head>
+    <title>Document</title>
+  </head>
+  <body>
+    <div class="testElement">Check This</div>
+    <style>
+      .testElement {
+        width: 400px;
+        height: 250px;
+        position: absolute;
+        top: 20px;
+        left: 60px;
+        background: green;
+      }
+    </style>
+
+    <script>
+      var myDiv = document.getElementsByClassName("testElement")[0];
+      myDiv.addEventListener("mouseover", () => {
+        myDiv.style.backgroundColor = "red";
+      });
+
+      myDiv.addEventListener("mouseout", () => {
+        myDiv.style.backgroundColor = "green";
+      });
+    </script>
+  </body>
+</html>

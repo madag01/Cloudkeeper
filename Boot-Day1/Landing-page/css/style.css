@@ -128,7 +128,78 @@ body {
 }
 
 .footer-container {
-  background: #F5F7FA;
+  background: #263238;
+  padding: 4rem 0;
+}
+
+.footer-section {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+}
+
+.foot-copyright {
+  color: #F5F7FA;
+  padding: 13px 0;
+}
+
+.footer-right {
+  flex: 3;
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  justify-content: space-around;
+}
+
+.footer-left {
+  flex: 1;
+  align-self: flex-start;
+  padding-top: 10px;
+}
+
+.socials {
+  padding: 22px 0;
+}
+
+.footer-logo {
+  display: block;
+  padding-bottom: 22px;
+}
+
+.right-content a {
+  display: block;
+  color: #F5F7FA;
+  text-decoration: none;
+  padding: 10px 0;
+  font-size: 14px;
+}
+
+.foot-head {
+  color: #FFFFFF;
+  font-size: 20px;
+  padding: 15px 0;
+}
+
+#stay-updated {
+  align-self: flex-start;
+}
+
+.stay-up {
+  color: #FFFFFF;
+  font-size: 20px;
+  padding: 15px 0;
+}
+
+.input-email {
+  width: 255px;
+  height: 40px;
+  border-radius: 16px;
+  padding: 8px 12px;
+  background-color: #3b464c;
+  font-size: 14px;
+  color: #D9DBE1;
+  border: 0;
+  font-weight: 500;
 }
 
 /*# sourceMappingURL=style.css.map */

@@ -123,5 +123,57 @@ body {
     font-size: 16px;
 }
 .footer-container {
-    background: $bg-gray;
+    background: $footer-color;
+    padding: 4rem 0;
+}
+.footer-section {
+    @include flex-center;
+}
+.foot-copyright {
+    color: $footer-text-color;
+    padding: 13px 0;
+}
+.footer-right{
+    flex: 3;
+    @include flex-center;
+    justify-content: space-around;
+}
+.footer-left{
+    flex: 1;
+    align-self: flex-start;
+    padding-top: 10px;
+}
+.socials {
+    padding: 22px 0;
+}
+.footer-logo {
+    display: block;
+    padding-bottom: 22px;
+}
+.right-content a{
+    display: block;
+    color: $footer-text-color;
+    text-decoration: none;
+    padding: 10px 0;
+    font-size: 14px;
+}
+.foot-head {
+    @include flex-start;
+}
+#stay-updated {
+    align-self: flex-start;
+}
+.stay-up {
+    @include flex-start
+}
+.input-email {
+    width: 255px;
+    height: 40px;
+    border-radius: 16px;
+    padding: 8px 12px;
+    background-color: #3b464c;
+    font-size: 14px;
+    color: #D9DBE1;
+    border: 0;
+    font-weight:500;
 }
