@@ -1,160 +1,151 @@
 <!DOCTYPE html>
 <html>
-<head>
-  <title>Student Marks Management</title>
-  <style>
-    body {
-      font-family: Arial, sans-serif;
-      margin: 40px;
-      background-color: #f8f8f8;
-    }
-    h1 {
-      color: #333;
-    }
-    table {
-      width: 100%;
-      border-collapse: collapse;
-      margin-top: 20px;
-      background: white;
-    }
-    th, td {
-      border: 1px solid #ccc;
-      padding: 10px;
-      text-align: center;
-    }
-    th {
-      background-color: #eee;
-    }
-    button {
-      background-color: #007bff;
-      color: white;
-      border: none;
-      padding: 10px 20px;
-      cursor: pointer;
-      font-size: 16px;
-    }
-    button:hover {
-      background-color: #0056b3;
-    }
-  </style>
-</head>
-<body>
-
-  <h1>Student Marks Management System</h1>
-  <button onclick="addStudent()">Add Student</button>
-
-  <table id="studentTable">
-    <thead>
-      <tr>
-        <th>Student Name</th>
-        <th>Subject 1</th>
-        <th>Subject 2</th>
-        <th>Subject 3</th>
-        <th>Subject 4</th>
-        <th>Subject 5</th>
-        <th>Total Marks</th>
-        <th>Average Marks</th>
-      </tr>
-    </thead>
-    <tbody id="tableBody">
-      <!-- Rows will appear here -->
-    </tbody>
-  </table>
-
-  <script>
-    // Global array to store students
-    var students = [];
-
-    // Load saved data from localStorage
-    function loadData() {
-      var data = localStorage.getItem("studentsData");
-      if (data) {
-        students = JSON.parse(data);
-        renderTable();
+  <head>
+    <title>Student Marks Management</title>
+    <style>
+      body {
+        font-family: Arial, sans-serif;
+        margin: 40px;
+        background-color: #f8f8f8;
       }
-    }
+      h1 {
+        color: #333;
+      }
+      table {
+        width: 100%;
+        border-collapse: collapse;
+        margin-top: 20px;
+        background: white;
+      }
+      th,
+      td {
+        border: 1px solid #ccc;
+        padding: 10px;
+        text-align: center;
+      }
+      th {
+        background-color: #eee;
+      }
+      button {
+        background-color: #007bff;
+        color: white;
+        border: none;
+        padding: 10px 20px;
+        cursor: pointer;
+        font-size: 16px;
+      }
+      button:hover {
+        background-color: #0056b3;
+      }
+    </style>
+  </head>
+  <body>
+    <h1>Student Marks Management System</h1>
+    <button onclick="addStudent()">Add Student</button>
 
-    // Save data to localStorage
-    function saveData() {
-      localStorage.setItem("studentsData", JSON.stringify(students));
-    }
+    <table id="studentTable">
+      <thead>
+        <tr>
+          <th>Student Name</th>
+          <th>Subject 1</th>
+          <th>Subject 2</th>
+          <th>Subject 3</th>
+          <th>Subject 4</th>
+          <th>Subject 5</th>
+          <th>Total Marks</th>
+          <th>Average Marks</th>
+        </tr>
+      </thead>
+      <tbody id="tableBody">
+      </tbody>
+    </table>
 
-    // Add new student
-    function addStudent() {
-      var name = prompt("Enter student name:");
-
-      if (!name || name.trim() === "") {
-        alert("Invalid name. Please try again.");
-        return;
+    <script>
+      var students = [];
+      function loadData() {
+        var data = localStorage.getItem("studentsData");
+        if (data) {
+          students = JSON.parse(data);
+          students.forEach((student) => {
+            renderTable(student);
+          });
+        }
       }
 
-      var marks = [];
-      for (var i = 1; i <= 5; i++) {
-        var mark = prompt("Enter marks for Subject " + i + " (0-100):");
-        mark = parseFloat(mark);
+      function saveData() {
+        localStorage.setItem("studentsData", JSON.stringify(students));
+      }
 
-        if (isNaN(mark) || mark < 0 || mark > 100) {
-          alert("Invalid mark for Subject " + i + ". Please try again.");
+      function addStudent() {
+        var name = prompt("Enter student name:");
+
+        if (!name || name.trim() === "") {
+          alert("Invalid name. Please try again.");
           return;
         }
 
-        marks.push(mark);
-      }
+        var marks = [];
+        for (var i = 1; i <= 5; i++) {
+          var mark = prompt("Enter marks for Subject " + i + " (0-100):");
+          mark = parseFloat(mark);
 
-      var total = calculateTotal(marks);
-      var average = calculateAverage(marks);
+          if (isNaN(mark) || mark < 0 || mark > 100) {
+            alert("Invalid mark for Subject " + i + ". Please try again.");
+            return;
+          }
 
-      var student = {
-        name: name,
-        marks: marks,
-        total: total,
-        average: average
-      };
-
-      students.push(student);
-      saveData();
-      renderTable();
-    }
-
-    // Calculate total marks
-    function calculateTotal(marks) {
-      var sum = 0;
-      for (var i = 0; i < marks.length; i++) {
-        sum += marks[i];
-      }
-      return sum;
-    }
-
-    // Calculate average marks
-    function calculateAverage(marks) {
-      return (calculateTotal(marks) / marks.length).toFixed(2);
-    }
-
-    // Render table
-    function renderTable() {
-      var tbody = document.getElementById("tableBody");
-      tbody.innerHTML = ""; // Clear table
-
-      for (var i = 0; i < students.length; i++) {
-        var s = students[i];
-        var row = "<tr>";
-        row += "<td>" + s.name + "</td>";
-
-        for (var j = 0; j < s.marks.length; j++) {
-          row += "<td>" + s.marks[j] + "</td>";
+          marks.push(mark);
         }
 
-        row += "<td>" + s.total + "</td>";
-        row += "<td>" + s.average + "</td>";
-        row += "</tr>";
+        var total = calculateTotal(marks);
+        var average = calculateAverage(marks);
 
-        tbody.innerHTML += row;
+        var student = {
+          name: name,
+          marks: marks,
+          total: total,
+          average: average,
+        };
+
+        console.log("Student ", student);
+
+        students.push(student);
+        saveData();
+        renderTable(student);
       }
-    }
 
-    // Load data when page starts
-    window.onload = loadData;
-  </script>
+      function calculateTotal(marks) {
+        var sum = 0;
+        for (var i = 0; i < marks.length; i++) {
+          sum += marks[i];
+        }
+        return sum;
+      }
 
-</body>
+      function calculateAverage(marks) {
+        return (calculateTotal(marks) / marks.length).toFixed(2);
+      }
+
+      var tbody = document.getElementById("tableBody");
+
+      function renderTable(student) {
+        console.log("Student", student);
+        var newRow = document.createElement("tr");
+        newRow.innerHTML = `
+        <tr>
+          <td>${student.name}</td>
+          <td>${student.marks[0]}</td>
+          <td>${student.marks[1]}</td>
+          <td>${student.marks[2]}</td>
+          <td>${student.marks[3]}</td>
+          <td>${student.marks[4]}</td>
+          <td>${student.total}</td>
+          <td>${student.average}</td>
+        </tr>
+        `;
+        tbody.appendChild(newRow);
+      }
+      window.onload = loadData;
+    </script>
+  </body>
 </html>

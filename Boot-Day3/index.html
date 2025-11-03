@@ -1,0 +1,128 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <title>Product List App</title>
+  <style>
+    body {
+      font-family: Arial, sans-serif;
+      background: #f7f7f7;
+      padding: 20px;
+    }
+    h1 {
+      text-align: center;
+      color: #333;
+    }
+    #costliest {
+      text-align: center;
+      font-weight: bold;
+      color: #007bff;
+      margin-bottom: 20px;
+    }
+    .product-container {
+      display: flex;
+      flex-wrap: wrap;
+      justify-content: center;
+      gap: 20px;
+    }
+    .card {
+      background: white;
+      border: 2px solid #ddd;
+      border-radius: 10px;
+      width: 200px;
+      padding: 15px;
+      text-align: center;
+      box-shadow: 0 2px 5px rgba(0,0,0,0.1);
+      transition: all 0.3s ease;
+    }
+    .card:hover {
+      border-color: #007bff;
+      transform: scale(1.05);
+      box-shadow: 0 4px 10px rgba(0,0,0,0.2);
+      cursor: pointer;
+    }
+    .price {
+      color: #28a745;
+      font-weight: bold;
+      margin-top: 5px;
+    }
+    .category {
+      font-size: 0.9em;
+      color: #666;
+    }
+  </style>
+</head>
+<body>
+
+  <h1>Product List</h1>
+  <div id="costliest"></div>
+  <div class="product-container" id="productContainer"></div>
+
+  <script>
+    // Constructor function
+    function Product(name, price, category) {
+      this.name = name;
+      this.price = price;
+      this.category = category;
+    }
+
+    // Prototype method for discount
+    Product.prototype.getDiscountedPrice = function(percent) {
+      return this.price - (this.price * (percent / 100));
+    };
+
+    // IIFE for initialization
+    (function() {
+      const products = [
+        new Product("Laptop", 1200, "Electronics"),
+        new Product("Shoes", 80, "Fashion"),
+        new Product("Watch", 250, "Accessories"),
+        new Product("Smartphone", 999, "Electronics"),
+      ];
+
+      const container = document.getElementById('productContainer');
+      const costliestDiv = document.getElementById('costliest');
+
+      // Dynamically create product cards
+      products.forEach(prod => {
+        const card = document.createElement('div');
+        card.className = 'card';
+
+        const nameEl = document.createElement('h3');
+        nameEl.textContent = prod.name;
+
+        const priceEl = document.createElement('div');
+        priceEl.className = 'price';
+        priceEl.textContent = "$" + prod.price;
+
+        const categoryEl = document.createElement('div');
+        categoryEl.className = 'category';
+        categoryEl.textContent = prod.category;
+
+        card.appendChild(nameEl);
+        card.appendChild(priceEl);
+        card.appendChild(categoryEl);
+
+        // Hover events for highlight (redundant since CSS handles, but for requirement)
+        card.addEventListener('mouseenter', () => {
+          card.style.borderColor = '#007bff';
+        });
+        card.addEventListener('mouseleave', () => {
+          card.style.borderColor = '#ddd';
+        });
+
+        container.appendChild(card);
+      });
+
+      // Use call/apply/bind to find costliest product
+      function getMaxPrice() {
+        return Math.max.apply(null, products.map(p => p.price));
+      }
+
+      const maxPrice = getMaxPrice.call(products);
+      costliestDiv.textContent = `Price of costliest product is $${maxPrice}`;
+    })();
+  </script>
+
+</body>
+</html>
