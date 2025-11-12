@@ -1,0 +1,117 @@
+#sort processes in descending order according to memory
+ps aux --sort=-%mem 
+
+# prints top 10
+ps aux --sort=-%mem | head -n 10
+
+#kills the process with the given id (5249 in this case)
+sudo kill -9 5249
+
+# add new user with the name devops
+sudo adduser devops
+
+# giving sudo privalages
+ sudo usermod -aG sudo devops
+
+#switching between profiles
+su username
+
+# Connect to a remote server, create a directory, and copy files into it using SCP.
+scp dg-test.txt deepak@10.1.210.0:/home/deepak
+
+# List all active processes and save only those containing the word java into a file.
+ps aux | grep java      //processes for all users and all tasks are input for the grep java which searches for java(it will include grep java as well)
+ps aux | grep java | grep -v grep    //excludes grep command from the searches
+ps aux | grep java | grep -v grep > all_java_processes.txt   // saves the output in a new file named all_java_processes.txt(empty file will be created if nothing found)
+
+#Generate an SSH key pair and configure it for two different remote servers.
+ssh-keygen -t rsa -b 4096 -C "dhairya rsa"    //generating ssh key pair with rsa algo of 4096 bits with a comment (Generating public/private rsa key pair.)
+                                              //public key saved in .ssh folder with filename as id_rsa.pub
+                                              //private key saved in .ssh folder with filename as id_rsa
+
+ssh-copy-id deepak@10.1.210.0      // copies public key to the given location(deepak@10.1.210.0)
+ssh deepak@10.1.210.0         //to switch to the specified server
+cat /home/deepak/.ssh/id_rsa.pub    // to see the encrypted key
+logout   // to logout
+
+
+#Find all lines containing “error” in /var/log/syslog and redirect them to errors_found.txt
+grep -i "error" /var/log/syslog > errors_found.txt    //-i for case insensitive
+
+#Find all .conf files in /etc, sort them alphabetically, and save to conf_list.txt.
+find /etc -type f -name "*.conf" | sort > conf_list.txt   //permission denied for system protected directories(can go to root to get them as well)
+sudo su  //switches to root
+exit  // to exit from root(if entered again will close the terminal)
+
+#Display the total number of unique shell types listed in /etc/passwd and save to shell_count.txt
+awk -F: '{print $NF}' /etc/passwd | sort -u | wc -l > shell_count.txt
+
+#Zip the content of your home directory via tar and send it via scp to other person laptop. Unzip the content on other person laptop via tar.
+tar -czvf homedg_backup.tar.gz ~/
+scp homedg_backup.tar.gz deepak@10.1.210.0:/home/deepak
+ssh deepak@10.1.210.0
+tar -xzvf home_backup.tar.gz
+
+#Reset the current user password and reboot the system form shell.
+passwd dhairya-goyal
+sudo reboot
+
+#Explore vi/vim for  Creating a text file. Understand cursor movement, switching input mode (append, insert etc), deleting command, pasting content, undo , redo ,search , save and quit operations in vim. 
+    Modes:
+
+        i: Insert mode.
+
+        a: Append mode.
+
+        Esc: Return to Normal mode.
+
+        Navigation:
+
+        h, j, k, l → left, down, up, right.
+
+        gg → go to top; G → go to bottom.
+
+    Editing:
+
+        dd → delete line.
+
+        p → paste.
+
+        u → undo.
+
+        Ctrl + r → redo.
+
+        /word → search for “word”.
+
+    Saving and exiting:
+
+        :w → save.
+
+        :q → quit.
+
+        :wq or ZZ → save and quit.
+
+        :q! → quit without saving.
+
+#Install and setup application via apt - mysql, postman, docker, dbeaver
+command : 
+    sudo apt update
+    sudo apt install mysql-server postman docker.io dbeaver-create
+
+    sudo systemctl enable docker
+    sudo systemctl start docker
+
+    sudo systemctl enable mysql
+    sudo systemctl start mysql
+    sudo systemctl enable docker
+    sudo systemctl start docker
+
+    sudo systemctl enable mysql
+    sudo systemctl start mysql
+
+
+
+
+
+
+
